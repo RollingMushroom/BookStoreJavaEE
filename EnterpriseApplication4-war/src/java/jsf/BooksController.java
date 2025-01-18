@@ -32,6 +32,9 @@ public class BooksController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private String selectedCategory;
+    private String selectedAuthor;
+    private int currentPage = 0;
+    private int booksPerPage = 16; // Shows 4 books per row for 4 rows
 
     public BooksController() {
     }
@@ -246,12 +249,82 @@ public class BooksController implements Serializable {
 
     public List<Books> getAllBooks() {
         if (selectedCategory != null && !selectedCategory.isEmpty()) {
+            if (selectedAuthor != null && !selectedAuthor.isEmpty()) {
+                // Filter by both category and author
+                return getFacade().getEntityManager()
+                        .createQuery("SELECT b FROM Books b WHERE b.category = :category AND b.author = :author", Books.class)
+                        .setParameter("category", selectedCategory)
+                        .setParameter("author", selectedAuthor)
+                        .getResultList();
+            }
+            // Filter by category only
             return getFacade().getEntityManager()
                     .createNamedQuery("Books.findByCategory", Books.class)
                     .setParameter("category", selectedCategory)
                     .getResultList();
+        } else if (selectedAuthor != null && !selectedAuthor.isEmpty()) {
+            // Filter by author only
+            return getFacade().getEntityManager()
+                    .createQuery("SELECT b FROM Books b WHERE b.author = :author", Books.class)
+                    .setParameter("author", selectedAuthor)
+                    .getResultList();
         }
+        // No filters
         return getFacade().findAll();
+    }
+
+    public String getSelectedAuthor() {
+        return selectedAuthor;
+    }
+    
+    public void setSelectedAuthor(String author) {
+        this.selectedAuthor = author;
+        this.currentPage = 0; // Reset to first page when filter changes
+    }
+    
+    public List<String> getAuthors() {
+        return getFacade().getEntityManager()
+                .createQuery("SELECT DISTINCT b.author FROM Books b ORDER BY b.author", String.class)
+                .getResultList();
+    }
+
+    public List<Books> getPagedBooks() {
+        List<Books> allBooks = getAllBooks();
+        int startIndex = currentPage * booksPerPage;
+        int endIndex = Math.min(startIndex + booksPerPage, allBooks.size());
+        
+        if (startIndex >= allBooks.size()) {
+            currentPage = 0;
+            startIndex = 0;
+            endIndex = Math.min(booksPerPage, allBooks.size());
+        }
+        
+        return allBooks.subList(startIndex, endIndex);
+    }
+    
+    public void nextPage() {
+        if ((currentPage + 1) * booksPerPage < getAllBooks().size()) {
+            currentPage++;
+        }
+    }
+    
+    public void previousPage() {
+        if (currentPage > 0) {
+            currentPage--;
+        }
+    }
+    
+    public int getCurrentPage() {
+        return currentPage;
+    }
+    
+    public int getTotalPages() {
+        return (int) Math.ceil((double) getAllBooks().size() / booksPerPage);
+    }
+
+    public String viewBook(Books book) {
+        this.current = book;
+        return "bookDetail?faces-redirect=true";
     }
 
     @FacesConverter(forClass = Books.class)

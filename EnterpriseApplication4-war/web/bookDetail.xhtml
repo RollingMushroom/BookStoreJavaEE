@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Book Details - #{booksController.selected.title}</title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Book Library Maju Jaya</h1>
+                </div>
+                <div class="user-info">
+                    <span>Welcome, #{loginController.currentUser.username}!</span>
+                    <span class="role-badge">#{loginController.currentUser.role}</span>
+                    <h:form>
+                        <h:commandButton value="Logout" action="#{loginController.logout}" 
+                                     class="logout-button"/>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="book-detail">
+                <div class="book-detail-content">
+                    <div class="book-detail-image">
+                        <img src="#{booksController.selected.cover}" alt="#{booksController.selected.title}" class="detail-cover-image"/>
+                    </div>
+                    <div class="book-detail-info">
+                        <h2>#{booksController.selected.title}</h2>
+                        <p class="detail-author">By #{booksController.selected.author}</p>
+                        <p class="detail-category">Category: #{booksController.selected.category}</p>
+                        <p class="detail-price">RM #{booksController.selected.price}</p>
+                        <div class="detail-actions">
+                            <h:form>
+                                <h:commandButton value="Back to Books" action="index" class="back-button"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Book Store. All rights reserved.</p>
+        </div>
+    </h:body>
+</html> 

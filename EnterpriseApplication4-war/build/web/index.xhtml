@@ -5,14 +5,14 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Book Store</title>
+        <title>Library</title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
     </h:head>
     <h:body>
         <div class="header">
             <div class="header-content">
                 <div class="logo">
-                    <h1>Book Store</h1>
+                    <h1>Book Library Maju Jaya</h1>
                 </div>
                 <div class="user-info">
                     <span>Welcome, #{loginController.currentUser.username}!</span>
@@ -26,30 +26,65 @@
         </div>
 
         <div class="main-content">
-            <div class="category-filter">
+            <div class="filters">
                 <h:form>
-                    <h:selectOneMenu value="#{booksController.selectedCategory}" class="category-select">
-                        <f:selectItem itemLabel="All Categories" itemValue=""/>
-                        <f:selectItems value="#{booksController.categories}" var="category"
-                                     itemLabel="#{category}" itemValue="#{category}"/>
-                        <f:ajax execute="@form" render=":booksList"/>
-                    </h:selectOneMenu>
+                    <div class="filter-group">
+                        <h:selectOneMenu value="#{booksController.selectedCategory}" class="filter-select">
+                            <f:selectItem itemLabel="All Categories" itemValue=""/>
+                            <f:selectItems value="#{booksController.categories}" var="category"
+                                         itemLabel="#{category}" itemValue="#{category}"/>
+                            <f:ajax execute="@form" render=":booksList"/>
+                        </h:selectOneMenu>
+
+                        <h:selectOneMenu value="#{booksController.selectedAuthor}" class="filter-select">
+                            <f:selectItem itemLabel="All Authors" itemValue=""/>
+                            <f:selectItems value="#{booksController.authors}" var="author"
+                                         itemLabel="#{author}" itemValue="#{author}"/>
+                            <f:ajax execute="@form" render=":booksList"/>
+                        </h:selectOneMenu>
+                    </div>
                 </h:form>
             </div>
 
             <h:panelGroup id="booksList">
                 <div class="books-grid">
-                    <ui:repeat value="#{booksController.allBooks}" var="book">
-                        <div class="book-card">
-                            <div class="book-cover">
-                                <img src="#{book.cover}" alt="#{book.title}" class="cover-image"/>
-                            </div>
-                            <h3>#{book.title}</h3>
-                            <p class="author">By #{book.author}</p>
-                            <p class="category">Category: #{book.category}</p>
-                            <p class="price">RM #{book.price}</p>
-                        </div>
+                    <ui:repeat value="#{booksController.pagedBooks}" var="book">
+                        <h:form>
+                            <h:commandLink action="#{booksController.viewBook(book)}" class="book-card-link">
+                                <div class="book-card">
+                                    <div class="book-cover">
+                                        <img src="#{book.cover}" alt="#{book.title}" class="cover-image"/>
+                                    </div>
+                                    <h3>#{book.title}</h3>
+                                    <p class="author">By #{book.author}</p>
+                                    <p class="category">Category: #{book.category}</p>
+                                    <p class="price">RM #{book.price}</p>
+                                </div>
+                            </h:commandLink>
+                        </h:form>
                     </ui:repeat>
+                </div>
+                
+                <div class="pagination">
+                    <h:form>
+                        <h:commandButton value="Previous" 
+                                       action="#{booksController.previousPage}" 
+                                       styleClass="page-button"
+                                       disabled="#{booksController.currentPage == 0}">
+                            <f:ajax render=":booksList"/>
+                        </h:commandButton>
+                        
+                        <span class="page-info">
+                            Page #{booksController.currentPage + 1} of #{booksController.totalPages}
+                        </span>
+                        
+                        <h:commandButton value="Next" 
+                                       action="#{booksController.nextPage}" 
+                                       styleClass="page-button"
+                                       disabled="#{booksController.currentPage + 1 >= booksController.totalPages}">
+                            <f:ajax render=":booksList"/>
+                        </h:commandButton>
+                    </h:form>
                 </div>
             </h:panelGroup>
         </div>
