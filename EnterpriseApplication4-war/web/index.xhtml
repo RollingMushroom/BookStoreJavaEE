@@ -3,16 +3,68 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Welcome</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
+        <style>
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem;
+                background-color: #4e6a71;
+                color: white;
+                margin-bottom: 2rem;
+            }
+            .user-info {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+            .logout-button {
+                background-color: #e33b06;
+                color: white;
+                padding: 0.5rem 1rem;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            .logout-button:hover {
+                background-color: #c33205;
+            }
+            .content {
+                padding: 1rem;
+            }
+            .nav-links {
+                margin-top: 2rem;
+            }
+            .nav-links a {
+                display: block;
+                margin-bottom: 1rem;
+                color: #4e6a71;
+                text-decoration: none;
+            }
+            .nav-links a:hover {
+                color: #e33b06;
+            }
+        </style>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="/books/List" value="Show All Books Items"/>
-        <br />
-        <h:link outcome="/users/List" value="Show All Users Items"/>
+        <div class="header">
+            <h1>Welcome to Library Management System</h1>
+            <div class="user-info">
+                <span>Welcome, #{loginController.currentUser.username}!</span>
+                <h:form>
+                    <h:commandButton value="Logout" action="#{loginController.logout}" 
+                                   class="logout-button"/>
+                </h:form>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="nav-links">
+                <h:link outcome="/books/List" value="Show All Books"/>
+                <h:link outcome="/users/List" value="Show All Users"/>
+            </div>
+        </div>
     </h:body>
-
-
 </html>
