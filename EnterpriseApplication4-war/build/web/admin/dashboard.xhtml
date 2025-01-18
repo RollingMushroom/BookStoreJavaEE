@@ -97,6 +97,7 @@
                                         </h:commandButton>
                                         <h:commandButton class="delete-btn" action="#{booksController.destroy}" value="Delete"
                                                          onclick="return confirm('Are you sure you want to delete this book?');">
+                                            <f:setPropertyActionListener target="#{booksController.current}" value="#{book}" />
                                             <f:param name="id" value="#{book.bookId}"/>
                                             <i class="fas fa-trash"></i>
                                             <f:ajax render=":statsForm :recentBooksForm" onevent="handleDeleteComplete" />

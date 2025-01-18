@@ -44,6 +44,14 @@ public class BooksController implements Serializable {
         return current;
     }
 
+    public Books getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Books current) {
+        this.current = current;
+    }
+
     private BooksFacade getFacade() {
         return ejbFacade;
     }
@@ -176,23 +184,33 @@ public class BooksController implements Serializable {
     }
 
     public String destroy() {
-        if (current == null) {
-            // If current is null, try to get the book ID from request parameter
-            String bookId = FacesContext.getCurrentInstance()
-                    .getExternalContext().getRequestParameterMap().get("id");
-            if (bookId != null) {
-                current = getFacade().find(Integer.valueOf(bookId));
+        try {
+            if (current == null) {
+                // If current is null, try to get the book ID from request parameter
+                String bookId = FacesContext.getCurrentInstance()
+                        .getExternalContext().getRequestParameterMap().get("id");
+                if (bookId != null) {
+                    current = getFacade().find(Integer.valueOf(bookId));
+                }
             }
+            if (current == null) {
+                // If still null, try to get from data table row
+                current = (Books) getItems().getRowData();
+                selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+            }
+            
+            if (current != null) {
+                performDestroy();
+                pagination = null;
+                items = null;
+            } else {
+                JsfUtil.addErrorMessage("Could not find book to delete");
+            }
+            return null;
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("Error deleting book: " + e.getMessage());
+            return null;
         }
-        if (current == null) {
-            // If still null, try to get from data table row
-            current = (Books) getItems().getRowData();
-            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        }
-        performDestroy();
-        pagination = null;
-        items = null;
-        return null;
     }
 
     private void performDestroy() {
