@@ -37,28 +37,15 @@
                     </div>
                     <div class="form-group">
                         <h:outputLabel styleClass="form-label" value="Category:" for="category" />
-                        <div class="category-input-group">
-                            <h:selectOneMenu styleClass="form-control" id="categorySelect" onchange="updateCategoryInput(this.value)">
-                                <f:selectItem itemValue="" itemLabel="-- Select or Type Below --"/>
-                                <f:selectItem itemValue="Fiction" itemLabel="Fiction"/>
-                                <f:selectItem itemValue="Non-Fiction" itemLabel="Non-Fiction"/>
-                                <f:selectItem itemValue="Science" itemLabel="Science"/>
-                                <f:selectItem itemValue="Technology" itemLabel="Technology"/>
-                                <f:selectItem itemValue="Business" itemLabel="Business"/>
-                                <f:selectItem itemValue="Arts" itemLabel="Arts"/>
-                            </h:selectOneMenu>
-                            <h:inputText id="category" styleClass="form-control" value="#{booksController.selected.category}"
-                                       title="#{bundle.CreateBooksTitle_category}" required="true" 
-                                       requiredMessage="#{bundle.CreateBooksRequiredMessage_category}"/>
-                        </div>
+                        <h:inputText id="category" styleClass="form-control" value="#{booksController.selected.category}"
+                                   title="#{bundle.CreateBooksTitle_category}" required="true" 
+                                   requiredMessage="#{bundle.CreateBooksRequiredMessage_category}"/>
                     </div>
-                    <h:outputScript>
-                        function updateCategoryInput(value) {
-                            if (value) {
-                                document.getElementById('form:category').value = value;
-                            }
-                        }
-                    </h:outputScript>
+                    <div class="form-group">
+                        <h:outputLabel styleClass="form-label" value="Cover URL:" for="cover" />
+                        <h:inputText id="cover" styleClass="form-control" value="#{booksController.selected.cover}"
+                                   title="Book Cover URL"/>
+                    </div>
                     <div class="form-actions">
                         <h:commandButton value="Save" action="#{booksController.create}" styleClass="jsfcrud_button create"/>
                         <h:commandButton value="Show All Books" action="#{booksController.prepareList}" immediate="true" styleClass="jsfcrud_button view"/>
