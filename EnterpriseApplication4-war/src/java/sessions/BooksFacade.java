@@ -20,7 +20,7 @@ public class BooksFacade extends AbstractFacade<Books> {
     private EntityManager em;
 
     @Override
-    protected EntityManager getEntityManager() {
+    public EntityManager getEntityManager() {
         return em;
     }
 

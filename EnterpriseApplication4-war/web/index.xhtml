@@ -1,70 +1,59 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Welcome</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
-        <style>
-            .header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1rem;
-                background-color: #4e6a71;
-                color: white;
-                margin-bottom: 2rem;
-            }
-            .user-info {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-            }
-            .logout-button {
-                background-color: #e33b06;
-                color: white;
-                padding: 0.5rem 1rem;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-            .logout-button:hover {
-                background-color: #c33205;
-            }
-            .content {
-                padding: 1rem;
-            }
-            .nav-links {
-                margin-top: 2rem;
-            }
-            .nav-links a {
-                display: block;
-                margin-bottom: 1rem;
-                color: #4e6a71;
-                text-decoration: none;
-            }
-            .nav-links a:hover {
-                color: #e33b06;
-            }
-        </style>
+        <title>Book Store</title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
     </h:head>
     <h:body>
         <div class="header">
-            <h1>Welcome to Library Management System</h1>
-            <div class="user-info">
-                <span>Welcome, #{loginController.currentUser.username}!</span>
-                <h:form>
-                    <h:commandButton value="Logout" action="#{loginController.logout}" 
-                                   class="logout-button"/>
-                </h:form>
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Book Store</h1>
+                </div>
+                <div class="user-info">
+                    <span>Welcome, #{loginController.currentUser.username}!</span>
+                    <span class="role-badge">#{loginController.currentUser.role}</span>
+                    <h:form>
+                        <h:commandButton value="Logout" action="#{loginController.logout}" 
+                                     class="logout-button"/>
+                    </h:form>
+                </div>
             </div>
         </div>
-        
-        <div class="content">
-            <div class="nav-links">
-                <h:link outcome="/books/List" value="Show All Books"/>
-                <h:link outcome="/users/List" value="Show All Users"/>
+
+        <div class="main-content">
+            <div class="category-filter">
+                <h:form>
+                    <h:selectOneMenu value="#{booksController.selectedCategory}" class="category-select">
+                        <f:selectItem itemLabel="All Categories" itemValue=""/>
+                        <f:selectItems value="#{booksController.categories}" var="category"
+                                     itemLabel="#{category}" itemValue="#{category}"/>
+                        <f:ajax execute="@form" render=":booksList"/>
+                    </h:selectOneMenu>
+                </h:form>
             </div>
+
+            <h:panelGroup id="booksList">
+                <div class="books-grid">
+                    <ui:repeat value="#{booksController.items}" var="book">
+                        <div class="book-card">
+                            <h3>#{book.title}</h3>
+                            <p class="author">By #{book.author}</p>
+                            <p class="category">Category: #{book.category}</p>
+                            <p class="price">$#{book.price}</p>
+                            <!-- Add more book details or actions here -->
+                        </div>
+                    </ui:repeat>
+                </div>
+            </h:panelGroup>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Book Store. All rights reserved.</p>
         </div>
     </h:body>
 </html>

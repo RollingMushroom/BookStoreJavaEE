@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
 import sessions.UsersFacade;
 
 @Named("loginController")
@@ -42,7 +41,13 @@ public class LoginController implements Serializable {
             
             currentUser = query.getSingleResult();
             loggedIn = true;
-            return "/index?faces-redirect=true";
+            
+            // Redirect based on role
+            if ("admin".equals(currentUser.getRole())) {
+                return "admin";
+            } else {
+                return "user";
+            }
         } catch (NoResultException e) {
             FacesContext.getCurrentInstance().addMessage(
                 null,
@@ -56,6 +61,14 @@ public class LoginController implements Serializable {
         currentUser = null;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/login?faces-redirect=true";
+    }
+    
+    public boolean isAdmin() {
+        return currentUser != null && "admin".equals(currentUser.getRole());
+    }
+    
+    public boolean isUser() {
+        return currentUser != null && "user".equals(currentUser.getRole());
     }
     
     // Getters and Setters

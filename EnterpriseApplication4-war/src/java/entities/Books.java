@@ -31,7 +31,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Books.findByBookId", query = "SELECT b FROM Books b WHERE b.bookId = :bookId"),
     @NamedQuery(name = "Books.findByTitle", query = "SELECT b FROM Books b WHERE b.title = :title"),
     @NamedQuery(name = "Books.findByAuthor", query = "SELECT b FROM Books b WHERE b.author = :author"),
-    @NamedQuery(name = "Books.findByPrice", query = "SELECT b FROM Books b WHERE b.price = :price")})
+    @NamedQuery(name = "Books.findByPrice", query = "SELECT b FROM Books b WHERE b.price = :price"),
+    @NamedQuery(name = "Books.findByCategory", query = "SELECT b FROM Books b WHERE b.category = :category"),
+    @NamedQuery(name = "Books.findDistinctCategories", query = "SELECT DISTINCT b.category FROM Books b ORDER BY b.category")})
 public class Books implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,6 +57,11 @@ public class Books implements Serializable {
     @NotNull
     @Column(name = "PRICE")
     private BigDecimal price;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "CATEGORY")
+    private String category;
 
     public Books() {
     }
@@ -63,11 +70,12 @@ public class Books implements Serializable {
         this.bookId = bookId;
     }
 
-    public Books(Integer bookId, String title, String author, BigDecimal price) {
+    public Books(Integer bookId, String title, String author, BigDecimal price, String category) {
         this.bookId = bookId;
         this.title = title;
         this.author = author;
         this.price = price;
+        this.category = category;
     }
 
     public Integer getBookId() {
@@ -100,6 +108,14 @@ public class Books implements Serializable {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+    
+    public String getCategory() {
+        return category;
+    }
+    
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override
