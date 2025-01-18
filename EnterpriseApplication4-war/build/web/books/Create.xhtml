@@ -9,30 +9,63 @@
             <h:outputText value="#{bundle.CreateBooksTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_bookId}" for="bookId" />
-                    <h:inputText id="bookId" value="#{booksController.selected.bookId}" title="#{bundle.CreateBooksTitle_bookId}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_bookId}"/>
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_title}" for="title" />
-                    <h:inputText id="title" value="#{booksController.selected.title}" title="#{bundle.CreateBooksTitle_title}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_title}"/>
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_author}" for="author" />
-                    <h:inputText id="author" value="#{booksController.selected.author}" title="#{bundle.CreateBooksTitle_author}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_author}"/>
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_price}" for="price" />
-                    <h:inputText id="price" value="#{booksController.selected.price}" title="#{bundle.CreateBooksTitle_price}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_price}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{booksController.create}" value="#{bundle.CreateBooksSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{booksController.prepareList}" value="#{bundle.CreateBooksShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateBooksIndexLink}"/>
-            </h:form>
+            <div class="jsfcrud_form">
+                <h2 class="section-title">#{bundle.CreateBooksTitle}</h2>
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="error-message" infoClass="success-message" layout="table"/>
+                </h:panelGroup>
+                <h:form styleClass="form">
+                    <div class="form-group">
+                        <h:outputLabel styleClass="form-label" value="Book ID:" for="bookId" />
+                        <h:inputText styleClass="form-control" id="bookId" value="#{booksController.selected.bookId}" title="#{bundle.CreateBooksTitle_bookId}" 
+                                   required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_bookId}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel styleClass="form-label" value="Title:" for="title" />
+                        <h:inputText styleClass="form-control" id="title" value="#{booksController.selected.title}" title="#{bundle.CreateBooksTitle_title}" 
+                                   required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_title}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel styleClass="form-label" value="Author:" for="author" />
+                        <h:inputText styleClass="form-control" id="author" value="#{booksController.selected.author}" title="#{bundle.CreateBooksTitle_author}" 
+                                   required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_author}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel styleClass="form-label" value="Price:" for="price" />
+                        <h:inputText styleClass="form-control" id="price" value="#{booksController.selected.price}" title="#{bundle.CreateBooksTitle_price}" 
+                                   required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_price}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel styleClass="form-label" value="Category:" for="category" />
+                        <div class="category-input-group">
+                            <h:selectOneMenu styleClass="form-control" id="categorySelect" onchange="updateCategoryInput(this.value)">
+                                <f:selectItem itemValue="" itemLabel="-- Select or Type Below --"/>
+                                <f:selectItem itemValue="Fiction" itemLabel="Fiction"/>
+                                <f:selectItem itemValue="Non-Fiction" itemLabel="Non-Fiction"/>
+                                <f:selectItem itemValue="Science" itemLabel="Science"/>
+                                <f:selectItem itemValue="Technology" itemLabel="Technology"/>
+                                <f:selectItem itemValue="Business" itemLabel="Business"/>
+                                <f:selectItem itemValue="Arts" itemLabel="Arts"/>
+                            </h:selectOneMenu>
+                            <h:inputText id="category" styleClass="form-control" value="#{booksController.selected.category}"
+                                       title="#{bundle.CreateBooksTitle_category}" required="true" 
+                                       requiredMessage="#{bundle.CreateBooksRequiredMessage_category}"/>
+                        </div>
+                    </div>
+                    <h:outputScript>
+                        function updateCategoryInput(value) {
+                            if (value) {
+                                document.getElementById('form:category').value = value;
+                            }
+                        }
+                    </h:outputScript>
+                    <div class="form-actions">
+                        <h:commandButton value="Save" action="#{booksController.create}" styleClass="jsfcrud_button create"/>
+                        <h:commandButton value="Show All Books" action="#{booksController.prepareList}" immediate="true" styleClass="jsfcrud_button view"/>
+                        <h:button value="Back to Dashboard" outcome="/admin/dashboard" styleClass="jsfcrud_button"/>
+                    </div>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
-
 </html>
