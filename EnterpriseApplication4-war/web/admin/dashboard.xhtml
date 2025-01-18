@@ -6,6 +6,13 @@
     <h:head>
         <title>Admin Dashboard - Book Store</title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <script type="text/javascript">
+            function handleDeleteComplete(data) {
+                if (data.status === 'success') {
+                    alert("Book successfully deleted!");
+                }
+            }
+        </script>
     </h:head>
     <h:body>
         <div class="header">
@@ -34,16 +41,18 @@
 
         <div class="main-content">
             <section class="admin-dashboard">
-                <div class="admin-stats">
-                    <div class="stat-card">
-                        <h4>Total Books</h4>
-                        <p>#{booksController.pagination.itemsCount}</p>
+                <h:form id="statsForm">
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <h4>Total Books</h4>
+                            <p>#{booksController.pagination.itemsCount}</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Total Users</h4>
+                            <p>#{usersController.pagination.itemsCount}</p>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <h4>Total Users</h4>
-                        <p>#{usersController.pagination.itemsCount}</p>
-                    </div>
-                </div>
+                </h:form>
 
                 <div class="admin-actions">
                     <h:link outcome="/books/Create" value="Add New Book" class="action-button"/>
@@ -52,34 +61,51 @@
 
                 <div class="recent-books">
                     <h3 class="section-title">Recent Books</h3>
-                    <h:form>
-                        <h:dataTable value="#{booksController.items}" var="book" 
-                                   rows="5" styleClass="book-table">
-                            <h:column>
-                                <f:facet name="header">Title</f:facet>
-                                #{book.title}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Author</f:facet>
-                                #{book.author}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Category</f:facet>
-                                #{book.category}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Price</f:facet>
-                                $#{book.price}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Actions</f:facet>
-                                <h:commandLink action="#{booksController.prepareEdit}" value="Edit"/>
-                                &#160;
-                                <h:commandLink action="#{booksController.destroy}" value="Delete" 
-                                             onclick="return confirm('Are you sure?');"/>
-                            </h:column>
-                        </h:dataTable>
-                    </h:form>
+                    <div class="table-container">
+                        <h:form id="booksForm">
+                            <h:dataTable value="#{booksController.items}" var="book" 
+                                       rows="5" styleClass="dashboard-table">
+                                <h:column>
+                                    <f:facet name="header">Title</f:facet>
+                                    <div class="book-cell">
+                                        <span class="book-title">#{book.title}</span>
+                                    </div>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Author</f:facet>
+                                    <div class="book-cell">
+                                        <span class="book-author">#{book.author}</span>
+                                    </div>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Category</f:facet>
+                                    <div class="book-cell">
+                                        <span class="category-badge">#{book.category}</span>
+                                    </div>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Price</f:facet>
+                                    <div class="book-cell">
+                                        <span class="book-price">RM #{book.price}</span>
+                                    </div>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Actions</f:facet>
+                                    <div class="action-buttons">
+                                        <h:commandButton class="edit-btn" action="#{booksController.prepareEdit(book)}" value="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </h:commandButton>
+                                        <h:commandButton class="delete-btn" action="#{booksController.destroy}" value="Delete"
+                                                     onclick="return confirm('Are you sure you want to delete this book?');">
+                                            <f:param name="id" value="#{book.bookId}"/>
+                                            <i class="fas fa-trash"></i>
+                                            <f:ajax render=":statsForm :booksForm" onevent="handleDeleteComplete" />
+                                        </h:commandButton>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
                 </div>
             </section>
         </div>

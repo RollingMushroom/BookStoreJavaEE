@@ -136,7 +136,12 @@ public class BooksController implements Serializable {
     public String prepareEdit() {
         current = (Books) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        return "/books/Edit";
+    }
+
+    public String prepareEdit(Books book) {
+        current = book;
+        return "/books/Edit";
     }
 
     public String update() {
@@ -156,7 +161,7 @@ public class BooksController implements Serializable {
         performDestroy();
         pagination = null;
         items = null;
-        return "List";
+        return null;
     }
 
     private void performDestroy() {

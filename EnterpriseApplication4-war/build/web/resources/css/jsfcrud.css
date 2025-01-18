@@ -5,10 +5,73 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Page Structure */
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    flex: 1 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page-title {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3498db;
+    font-size: 24px;
+    text-align: center;
+}
+
+.main-content {
+    padding: 20px 0;
+}
+
+/* Footer Styles */
+.footer {
+    flex-shrink: 0;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 20px 0;
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 /* Original JSF CRUD Styles */
@@ -171,13 +234,6 @@ a {
     color: #3498db;
 }
 
-/* Main Content Styles */
-.main-content {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-}
-
 /* Hero Section */
 .hero-section {
     background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)),
@@ -322,15 +378,6 @@ a {
 .category-card:hover {
     background: #3498db;
     color: white;
-}
-
-/* Footer Styles */
-.footer {
-    background: #2c3e50;
-    color: #ecf0f1;
-    padding: 2rem;
-    margin-top: 3rem;
-    text-align: center;
 }
 
 /* Login Form Styles */
@@ -775,4 +822,171 @@ select.form-control option {
     color: #666;
     margin-top: -5px;
     margin-bottom: 5px;
+}
+
+/* Recent Books Table Styles */
+.recent-books {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 2rem;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 1rem;
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+}
+
+.dashboard-table th {
+    background: #2c3e50;
+    color: white;
+    padding: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-align: left;
+    border-bottom: 2px solid #3498db;
+}
+
+.dashboard-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.dashboard-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.book-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.book-title {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.book-author {
+    color: #7f8c8d;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.book-price {
+    font-weight: 600;
+    color: #27ae60;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.edit-button, .delete-button {
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.edit-button {
+    background-color: #3498db;
+    color: white;
+}
+
+.delete-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.edit-button:hover, .delete-button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Add Font Awesome */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+/* Action Buttons Styling */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.action-buttons .edit-btn,
+.action-buttons .delete-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 14px;
+    min-width: 80px;
+    transition: background-color 0.2s;
+}
+
+.action-buttons .edit-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.action-buttons .edit-btn:hover {
+    background-color: #45a049;
+}
+
+.action-buttons .delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.action-buttons .delete-btn:hover {
+    background-color: #da190b;
+}
+
+.action-buttons i {
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+/* Ensure table cell alignment */
+.dashboard-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.dashboard-table th {
+    text-align: center;
 }
