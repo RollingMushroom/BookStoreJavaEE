@@ -155,16 +155,19 @@ a {
 .header {
     background-color: #2c3e50;
     color: white;
-    padding: 1rem 2rem;
+    padding: 1rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
 }
 
 .header-content {
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 1rem;
 }
 
 .logo h1 {
@@ -213,14 +216,17 @@ a {
 /* Navigation Styles */
 .nav-bar {
     background-color: #34495e;
-    padding: 1rem 0;
+    padding: 0.8rem 0;
+    width: 100%;
 }
 
 .nav-content {
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     gap: 2rem;
+    padding: 0 1rem;
 }
 
 .nav-content a {
@@ -989,4 +995,24 @@ select.form-control option {
 
 .dashboard-table th {
     text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-content {
+        padding: 0 0.5rem;
+    }
+    
+    .nav-content {
+        padding: 0 0.5rem;
+        gap: 1rem;
+    }
+    
+    .user-info {
+        gap: 0.8rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.5rem;
+    }
 }

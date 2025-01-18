@@ -124,6 +124,26 @@ public class BooksController implements Serializable {
 
     public String create() {
         try {
+            // Check if book with same ID or title already exists
+            Books existingBookById = getFacade().find(current.getBookId());
+            Books existingBookByTitle = getFacade().getEntityManager()
+                    .createQuery("SELECT b FROM Books b WHERE LOWER(b.title) = LOWER(:title)", Books.class)
+                    .setParameter("title", current.getTitle())
+                    .getResultList()
+                    .stream()
+                    .findFirst()
+                    .orElse(null);
+            
+            if (existingBookById != null) {
+                JsfUtil.addErrorMessage("Book with ID " + current.getBookId() + " already exists");
+                return null;
+            }
+            
+            if (existingBookByTitle != null) {
+                JsfUtil.addErrorMessage("The book with this title already exists");
+                return null;
+            }
+            
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BooksCreated"));
             return prepareCreate();
@@ -156,8 +176,19 @@ public class BooksController implements Serializable {
     }
 
     public String destroy() {
-        current = (Books) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (current == null) {
+            // If current is null, try to get the book ID from request parameter
+            String bookId = FacesContext.getCurrentInstance()
+                    .getExternalContext().getRequestParameterMap().get("id");
+            if (bookId != null) {
+                current = getFacade().find(Integer.valueOf(bookId));
+            }
+        }
+        if (current == null) {
+            // If still null, try to get from data table row
+            current = (Books) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        }
         performDestroy();
         pagination = null;
         items = null;
@@ -186,6 +217,13 @@ public class BooksController implements Serializable {
 
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+    }
+
+    public List<Books> getRecentBooks() {
+        return getFacade().getEntityManager()
+                .createQuery("SELECT b FROM Books b ORDER BY b.bookId DESC", Books.class)
+                .setMaxResults(5)
+                .getResultList();
     }
 
     @FacesConverter(forClass = Books.class)

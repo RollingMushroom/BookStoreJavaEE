@@ -81,6 +81,39 @@ public class UsersController implements Serializable {
 
     public String create() {
         try {
+            // Check if user with same ID, username, or email already exists
+            Users existingUserById = getFacade().find(current.getUserId());
+            Users existingUserByUsername = getFacade().getEntityManager()
+                    .createNamedQuery("Users.findByUsername", Users.class)
+                    .setParameter("username", current.getUsername())
+                    .getResultList()
+                    .stream()
+                    .findFirst()
+                    .orElse(null);
+            
+            Users existingUserByEmail = getFacade().getEntityManager()
+                    .createNamedQuery("Users.findByEmail", Users.class)
+                    .setParameter("email", current.getEmail())
+                    .getResultList()
+                    .stream()
+                    .findFirst()
+                    .orElse(null);
+            
+            if (existingUserById != null) {
+                JsfUtil.addErrorMessage("User with ID " + current.getUserId() + " already exists");
+                return null;
+            }
+            
+            if (existingUserByUsername != null) {
+                JsfUtil.addErrorMessage("Username '" + current.getUsername() + "' is already taken");
+                return null;
+            }
+            
+            if (existingUserByEmail != null) {
+                JsfUtil.addErrorMessage("Email '" + current.getEmail() + "' is already registered");
+                return null;
+            }
+            
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("resources/Bundle").getString("UsersCreated"));
             return prepareCreate();
