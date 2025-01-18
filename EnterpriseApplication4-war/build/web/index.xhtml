@@ -39,13 +39,15 @@
 
             <h:panelGroup id="booksList">
                 <div class="books-grid">
-                    <ui:repeat value="#{booksController.items}" var="book">
+                    <ui:repeat value="#{booksController.allBooks}" var="book">
                         <div class="book-card">
+                            <div class="book-cover">
+                                <img src="#{book.cover}" alt="#{book.title}" class="cover-image"/>
+                            </div>
                             <h3>#{book.title}</h3>
                             <p class="author">By #{book.author}</p>
                             <p class="category">Category: #{book.category}</p>
                             <p class="price">RM #{book.price}</p>
-                            <!-- Add more book details or actions here -->
                         </div>
                     </ui:repeat>
                 </div>

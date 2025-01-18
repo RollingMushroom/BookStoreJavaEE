@@ -67,6 +67,13 @@ public class LoginController implements Serializable {
         return currentUser != null && "admin".equals(currentUser.getRole());
     }
     
+    public String checkAdminAccess() {
+        if (!isLoggedIn() || !isAdmin()) {
+            return "/login?faces-redirect=true";
+        }
+        return null;
+    }
+    
     public boolean isUser() {
         return currentUser != null && "user".equals(currentUser.getRole());
     }

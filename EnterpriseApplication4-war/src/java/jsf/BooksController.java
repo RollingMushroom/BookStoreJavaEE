@@ -244,6 +244,16 @@ public class BooksController implements Serializable {
                 .getResultList();
     }
 
+    public List<Books> getAllBooks() {
+        if (selectedCategory != null && !selectedCategory.isEmpty()) {
+            return getFacade().getEntityManager()
+                    .createNamedQuery("Books.findByCategory", Books.class)
+                    .setParameter("category", selectedCategory)
+                    .getResultList();
+        }
+        return getFacade().findAll();
+    }
+
     @FacesConverter(forClass = Books.class)
     public static class BooksControllerConverter implements Converter {
 
