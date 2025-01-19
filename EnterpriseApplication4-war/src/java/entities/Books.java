@@ -123,7 +123,7 @@ public class Books implements Serializable {
     }
     
     public void setCategory(String category) {
-        this.category = category;
+        this.category = category != null ? category.trim().toLowerCase() : null;
     }
 
     public String getCover() {

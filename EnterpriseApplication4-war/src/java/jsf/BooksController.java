@@ -60,17 +60,24 @@ public class BooksController implements Serializable {
     }
     
     public List<String> getCategories() {
-        return getFacade().getEntityManager()
-                .createNamedQuery("Books.findDistinctCategories", String.class)
+        List<String> categories = getFacade().getEntityManager()
+                .createQuery("SELECT DISTINCT TRIM(LOWER(b.category)) FROM Books b ORDER BY LOWER(b.category)", String.class)
                 .getResultList();
+        
+        // Properly capitalize categories for display
+        return categories.stream()
+                .map(cat -> cat.substring(0, 1).toUpperCase() + cat.substring(1))
+                .collect(java.util.stream.Collectors.toList());
     }
     
     public String getSelectedCategory() {
-        return selectedCategory;
+        return selectedCategory != null 
+                ? selectedCategory.substring(0, 1).toUpperCase() + selectedCategory.substring(1)
+                : null;
     }
     
     public void setSelectedCategory(String category) {
-        this.selectedCategory = category;
+        this.selectedCategory = category != null ? category.trim().toLowerCase() : null;
         // Reset pagination when category changes
         pagination = null;
         items = null;
@@ -78,8 +85,8 @@ public class BooksController implements Serializable {
     
     public List<Books> getBooksByCategory(String category) {
         return getFacade().getEntityManager()
-                .createNamedQuery("Books.findByCategory", Books.class)
-                .setParameter("category", category)
+                .createQuery("SELECT b FROM Books b WHERE TRIM(LOWER(b.category)) = :category", Books.class)
+                .setParameter("category", category.trim().toLowerCase())
                 .getResultList();
     }
     
@@ -252,21 +259,21 @@ public class BooksController implements Serializable {
             if (selectedAuthor != null && !selectedAuthor.isEmpty()) {
                 // Filter by both category and author
                 return getFacade().getEntityManager()
-                        .createQuery("SELECT b FROM Books b WHERE b.category = :category AND b.author = :author", Books.class)
-                        .setParameter("category", selectedCategory)
-                        .setParameter("author", selectedAuthor)
+                        .createQuery("SELECT b FROM Books b WHERE TRIM(LOWER(b.category)) = :category AND TRIM(LOWER(b.author)) = :author", Books.class)
+                        .setParameter("category", selectedCategory.trim().toLowerCase())
+                        .setParameter("author", selectedAuthor.trim().toLowerCase())
                         .getResultList();
             }
             // Filter by category only
             return getFacade().getEntityManager()
-                    .createNamedQuery("Books.findByCategory", Books.class)
-                    .setParameter("category", selectedCategory)
+                    .createQuery("SELECT b FROM Books b WHERE TRIM(LOWER(b.category)) = :category", Books.class)
+                    .setParameter("category", selectedCategory.trim().toLowerCase())
                     .getResultList();
         } else if (selectedAuthor != null && !selectedAuthor.isEmpty()) {
             // Filter by author only
             return getFacade().getEntityManager()
-                    .createQuery("SELECT b FROM Books b WHERE b.author = :author", Books.class)
-                    .setParameter("author", selectedAuthor)
+                    .createQuery("SELECT b FROM Books b WHERE TRIM(LOWER(b.author)) = :author", Books.class)
+                    .setParameter("author", selectedAuthor.trim().toLowerCase())
                     .getResultList();
         }
         // No filters
