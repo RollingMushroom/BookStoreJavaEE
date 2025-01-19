@@ -6,43 +6,54 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
-  
+      
         <ui:define name="body">
             <div class="page-header">
-                <h1 class="page-title">#{bundle.ViewUsersTitle}</h1>
+                <h1 class="page-title">View User</h1>
             </div>
             
-            <h:panelGroup id="messagePanel" layout="block" styleClass="message-panel">
-                <h:messages errorClass="error-message" infoClass="info-message" layout="table"/>
-            </h:panelGroup>
-            
-            <h:form styleClass="user-form">
-                <h:panelGrid columns="2" styleClass="form-grid">
-                    <h:outputText value="#{bundle.ViewUsersLabel_userId}" styleClass="form-label"/>
-                    <h:outputText value="#{usersController.selected.userId}" styleClass="form-value"/>
-                    
-                    <h:outputText value="#{bundle.ViewUsersLabel_username}" styleClass="form-label"/>
-                    <h:outputText value="#{usersController.selected.username}" styleClass="form-value"/>
-                    
-                    <h:outputText value="#{bundle.ViewUsersLabel_email}" styleClass="form-label"/>
-                    <h:outputText value="#{usersController.selected.email}" styleClass="form-value"/>
-                </h:panelGrid>
+            <div class="book-detail">
+                <h:panelGroup id="messagePanel" layout="block" styleClass="message-panel">
+                    <h:messages errorClass="error-message" infoClass="info-message" layout="table"/>
+                </h:panelGroup>
                 
-                <div class="user-actions">
-                    <h:commandLink action="#{usersController.destroyAndView}" 
-                                 value="Delete"
-                                 styleClass="danger-action"
-                                 onclick="return confirm('Are you sure you want to delete this user?');"/>
-                    
-                    <h:link outcome="Edit" 
-                           value="#{bundle.ViewUsersEditLink}"
-                           styleClass="primary-action"/>
-                    
-                    <h:link outcome="List" 
-                           value="Back to List"
-                           styleClass="secondary-action"/>
-                </div>
-            </h:form>
+                <h:form styleClass="book-form">
+                    <div class="book-detail-content">
+                        <div class="book-detail-info">
+                            <h2 class="book-title">#{usersController.selected.username}</h2>
+                            
+                            <div class="detail-field">
+                                <span class="detail-label">User ID:</span>
+                                <span class="detail-value">#{usersController.selected.userId}</span>
+                            </div>
+                            
+                            <div class="detail-field">
+                                <span class="detail-label">Email:</span>
+                                <span class="detail-value">#{usersController.selected.email}</span>
+                            </div>
+                            
+                            <div class="book-actions">
+                                <div class="action-group primary-actions">
+                                    <h:link outcome="Edit" 
+                                           value="#{bundle.ViewUsersEditLink}"
+                                           styleClass="action-button edit"/>
+                                </div>
+                                
+                                <div class="action-group secondary-actions">
+                                    <h:commandLink action="#{usersController.prepareList}" 
+                                                 value="Show All Users"
+                                                 styleClass="action-button back"/>
+                                    
+                                    <h:commandLink action="#{usersController.destroyAndView}" 
+                                                 value="Delete"
+                                                 styleClass="action-button delete"
+                                                 onclick="return confirm('Are you sure you want to delete this user?');"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 
