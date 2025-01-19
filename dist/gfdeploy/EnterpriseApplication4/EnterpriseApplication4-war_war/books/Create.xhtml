@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Add New Book"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <div class="jsfcrud_form">
+                <!-- <h2 class="section-title">#{bundle.CreateBooksTitle}</h2> -->
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="error-message" infoClass="success-message" layout="table"/>
+                </h:panelGroup>
+                <h:form styleClass="form">
+                    <div class="form-group">
+                        <h:outputLabel styleClass="form-label" value="Book ID:" for="bookId" />
+                        <h:inputText styleClass="form-control" id="bookId" value="#{booksController.selected.bookId}" title="#{bundle.CreateBooksTitle_bookId}" 
+                                   required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_bookId}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel styleClass="form-label" value="Title:" for="title" />
+                        <h:inputText styleClass="form-control" id="title" value="#{booksController.selected.title}" title="#{bundle.CreateBooksTitle_title}" 
+                                   required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_title}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel styleClass="form-label" value="Author:" for="author" />
+                        <h:inputText styleClass="form-control" id="author" value="#{booksController.selected.author}" title="#{bundle.CreateBooksTitle_author}" 
+                                   required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_author}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel styleClass="form-label" value="Price:" for="price" />
+                        <h:inputText styleClass="form-control" id="price" value="#{booksController.selected.price}" title="#{bundle.CreateBooksTitle_price}" 
+                                   required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_price}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel styleClass="form-label" value="Category:" for="category" />
+                        <h:inputText id="category" styleClass="form-control" value="#{booksController.selected.category}"
+                                   title="#{bundle.CreateBooksTitle_category}" required="true" 
+                                   requiredMessage="#{bundle.CreateBooksRequiredMessage_category}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel styleClass="form-label" value="Cover URL:" for="cover" />
+                        <h:inputText id="cover" styleClass="form-control" value="#{booksController.selected.cover}"
+                                   title="Book Cover URL"/>
+                    </div>
+                    <div class="form-actions">
+                        <h:commandButton value="Save" action="#{booksController.create}" styleClass="jsfcrud_button create"/>
+                        <h:commandButton value="Show All Books" action="#{booksController.prepareList}" immediate="true" styleClass="jsfcrud_button view"/>
+                        <h:button value="Back to Dashboard" outcome="/admin/dashboard" styleClass="jsfcrud_button"/>
+                    </div>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
