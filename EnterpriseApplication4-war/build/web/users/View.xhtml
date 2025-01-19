@@ -10,33 +10,40 @@
             <h:outputText value="#{bundle.ViewUsersTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            <div class="page-header">
+                <h1 class="page-title">#{bundle.ViewUsersTitle}</h1>
+            </div>
+            
+            <h:panelGroup id="messagePanel" layout="block" styleClass="message-panel">
+                <h:messages errorClass="error-message" infoClass="info-message" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewUsersLabel_userId}"/>
-                    <h:outputText value="#{usersController.selected.userId}" title="#{bundle.ViewUsersTitle_userId}"/>
-                    <h:outputText value="#{bundle.ViewUsersLabel_username}"/>
-                    <h:outputText value="#{usersController.selected.username}" title="#{bundle.ViewUsersTitle_username}"/>
-                    <h:outputText value="#{bundle.ViewUsersLabel_password}"/>
-                    <h:outputText value="#{usersController.selected.password}" title="#{bundle.ViewUsersTitle_password}"/>
-                    <h:outputText value="#{bundle.ViewUsersLabel_email}"/>
-                    <h:outputText value="#{usersController.selected.email}" title="#{bundle.ViewUsersTitle_email}"/>
+            
+            <h:form styleClass="user-form">
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    <h:outputText value="#{bundle.ViewUsersLabel_userId}" styleClass="form-label"/>
+                    <h:outputText value="#{usersController.selected.userId}" styleClass="form-value"/>
+                    
+                    <h:outputText value="#{bundle.ViewUsersLabel_username}" styleClass="form-label"/>
+                    <h:outputText value="#{usersController.selected.username}" styleClass="form-value"/>
+                    
+                    <h:outputText value="#{bundle.ViewUsersLabel_email}" styleClass="form-label"/>
+                    <h:outputText value="#{usersController.selected.email}" styleClass="form-value"/>
                 </h:panelGrid>
-                <br />
-                <h:commandLink action="#{usersController.destroyAndView}" value="#{bundle.ViewUsersDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewUsersEditLink}"/>
-                <br />
-                <h:commandLink action="#{usersController.prepareCreate}" value="#{bundle.ViewUsersCreateLink}" />
-                <br />
-                <h:commandLink action="#{usersController.prepareList}" value="#{bundle.ViewUsersShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewUsersIndexLink}"/>
-
+                
+                <div class="user-actions">
+                    <h:commandLink action="#{usersController.destroyAndView}" 
+                                 value="#{bundle.ViewUsersDestroyLink}"
+                                 styleClass="danger-action"
+                                 onclick="return confirm('Are you sure you want to delete this user?');"/>
+                    
+                    <h:link outcome="Edit" 
+                           value="#{bundle.ViewUsersEditLink}"
+                           styleClass="primary-action"/>
+                    
+                    <h:link outcome="List" 
+                           value="Back to List"
+                           styleClass="secondary-action"/>
+                </div>
             </h:form>
         </ui:define>
     </ui:composition>

@@ -6,62 +6,129 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListBooksTitle}"></h:outputText>
-        </ui:define>
+
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListBooksEmpty}" rendered="#{booksController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{booksController.items.rowCount > 0}">
-                    <h:outputText value="#{booksController.pagination.pageFirstItem + 1}..#{booksController.pagination.pageLastItem + 1}/#{booksController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{booksController.previous}" value="#{bundle.Previous} #{booksController.pagination.pageSize}" rendered="#{booksController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{booksController.next}" value="#{bundle.Next} #{booksController.pagination.pageSize}" rendered="#{booksController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{booksController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListBooksTitle_bookId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.bookId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListBooksTitle_title}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.title}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListBooksTitle_author}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.author}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListBooksTitle_price}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.price}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{booksController.prepareView}" value="#{bundle.ListBooksViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{booksController.prepareEdit}" value="#{bundle.ListBooksEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{booksController.destroy}" value="#{bundle.ListBooksDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{booksController.prepareCreate}" value="#{bundle.ListBooksCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListBooksIndexLink}"/>
-            </h:form>
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">Book Management</h1>
+                    <div class="page-actions">
+                        <h:form>
+                            <h:commandLink action="#{booksController.prepareCreate}" 
+                                         styleClass="create-btn">
+                                <i class="fas fa-plus"></i> Add New Book
+                            </h:commandLink>
+                        </h:form>
+                    </div>
+                </div>
+
+                <h:form styleClass="book-list">
+                    <h:panelGroup id="messagePanel" layout="block" styleClass="message-panel">
+                        <h:messages errorClass="error-message" infoClass="info-message" layout="table"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{booksController.items.rowCount == 0}">
+                        <div class="empty-state">
+                            <i class="fas fa-book empty-icon"></i>
+                            <h3 class="empty-title">No Books Available</h3>
+                            <p class="empty-message">Start by adding your first book to the collection.</p>
+                        </div>
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{booksController.items.rowCount > 0}">
+                        <div class="table-controls">
+                            <div class="pagination-info">
+                                <h:outputText value="Showing #{booksController.pagination.pageFirstItem + 1} to #{booksController.pagination.pageLastItem + 1} of #{booksController.pagination.itemsCount} entries"/>
+                            </div>
+                            <div class="pagination-controls">
+                                <h:commandLink action="#{booksController.previous}" 
+                                             styleClass="pagination-btn #{!booksController.pagination.hasPreviousPage ? 'disabled' : ''}"
+                                             rendered="#{booksController.pagination.hasPreviousPage}">
+                                    <i class="fas fa-chevron-left"></i> Previous
+                                </h:commandLink>
+                                <h:commandLink action="#{booksController.next}" 
+                                             styleClass="pagination-btn #{!booksController.pagination.hasNextPage ? 'disabled' : ''}"
+                                             rendered="#{booksController.pagination.hasNextPage}">
+                                    Next <i class="fas fa-chevron-right"></i>
+                                </h:commandLink>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <h:dataTable value="#{booksController.items}" 
+                                       var="item" 
+                                       styleClass="dashboard-table"
+                                       rowClasses="table-row-odd,table-row-even"
+                                       headerClass="table-header"
+                                       columnClasses="text-center,text-left,text-left,text-right,text-center">
+                                
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ID"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.bookId}"/>
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Title"/>
+                                    </f:facet>
+                                    <div class="book-info">
+                                        <h:outputText value="#{item.title}" styleClass="book-title"/>
+                                        <h:outputText value="#{item.category}" styleClass="category-badge"/>
+                                    </div>
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Author"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.author}"/>
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Price"/>
+                                    </f:facet>
+                                    <h:outputText value="RM #{item.price}" styleClass="price-tag"/>
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Actions"/>
+                                    </f:facet>
+                                    <div class="action-buttons">
+                                        <h:commandLink action="#{booksController.prepareView}" 
+                                                     styleClass="action-btn view-btn"
+                                                     title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </h:commandLink>
+                                        
+                                        <h:commandLink action="#{booksController.prepareEdit}" 
+                                                     styleClass="action-btn edit-btn"
+                                                     title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </h:commandLink>
+                                        
+                                        <h:commandLink action="#{booksController.destroy}" 
+                                                     styleClass="action-btn delete-btn"
+                                                     title="Delete"
+                                                     onclick="return confirm('Are you sure you want to delete this book?');">
+                                            <i class="fas fa-trash"></i>
+                                        </h:commandLink>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                    </h:panelGroup>
+
+                    <div class="bottom-actions">
+                        <h:link outcome="/admin/dashboard" 
+                               styleClass="back-button">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </h:link>
+                    </div>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 

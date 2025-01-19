@@ -334,6 +334,26 @@ public class BooksController implements Serializable {
         return "bookDetail?faces-redirect=true";
     }
 
+    public String next() {
+        getPagination().nextPage();
+        recreateModel();
+        return "List";
+    }
+
+    public String previous() {
+        getPagination().previousPage();
+        recreateModel();
+        return "List";
+    }
+
+    private void recreateModel() {
+        items = null;
+    }
+
+    private void recreatePagination() {
+        pagination = null;
+    }
+
     @FacesConverter(forClass = Books.class)
     public static class BooksControllerConverter implements Converter {
 

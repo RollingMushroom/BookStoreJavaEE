@@ -16,49 +16,67 @@
                 </h:panelGroup>
                 <h:form styleClass="form">
                     <div class="form-group">
-                        <h:outputLabel styleClass="form-label" value="#{bundle.EditBooksLabel_bookId}" for="bookId" />
-                        <h:inputText styleClass="form-control" id="bookId" value="#{booksController.selected.bookId}" 
-                                   title="#{bundle.EditBooksTitle_bookId}" required="true" 
+                        <h:outputLabel styleClass="form-label" value="Book ID:" for="bookId" />
+                        <h:inputText styleClass="form-control" id="bookId" 
+                                   value="#{booksController.selected.bookId}" 
+                                   title="#{bundle.EditBooksTitle_bookId}" 
+                                   required="true" 
                                    requiredMessage="#{bundle.EditBooksRequiredMessage_bookId}"/>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel styleClass="form-label" value="#{bundle.EditBooksLabel_title}" for="title" />
-                        <h:inputText styleClass="form-control" id="title" value="#{booksController.selected.title}" 
-                                   title="#{bundle.EditBooksTitle_title}" required="true" 
+                        <h:outputLabel styleClass="form-label" value="Title:" for="title" />
+                        <h:inputText styleClass="form-control" id="title" 
+                                   value="#{booksController.selected.title}" 
+                                   title="#{bundle.EditBooksTitle_title}" 
+                                   required="true" 
                                    requiredMessage="#{bundle.EditBooksRequiredMessage_title}"/>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel styleClass="form-label" value="#{bundle.EditBooksLabel_author}" for="author" />
-                        <h:inputText styleClass="form-control" id="author" value="#{booksController.selected.author}" 
-                                   title="#{bundle.EditBooksTitle_author}" required="true" 
+                        <h:outputLabel styleClass="form-label" value="Author:" for="author" />
+                        <h:inputText styleClass="form-control" id="author" 
+                                   value="#{booksController.selected.author}" 
+                                   title="#{bundle.EditBooksTitle_author}" 
+                                   required="true" 
                                    requiredMessage="#{bundle.EditBooksRequiredMessage_author}"/>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel styleClass="form-label" value="#{bundle.EditBooksLabel_price}" for="price" />
-                        <h:inputText styleClass="form-control" id="price" value="#{booksController.selected.price}" 
-                                   title="#{bundle.EditBooksTitle_price}" required="true" 
+                        <h:outputLabel styleClass="form-label" value="Price:" for="price" />
+                        <h:inputText styleClass="form-control" id="price" 
+                                   value="#{booksController.selected.price}" 
+                                   title="#{bundle.EditBooksTitle_price}" 
+                                   required="true" 
                                    requiredMessage="#{bundle.EditBooksRequiredMessage_price}"/>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel styleClass="form-label" value="#{bundle.EditBooksLabel_category}" for="category" />
-                        <h:inputText styleClass="form-control" id="category" value="#{booksController.selected.category}" 
-                                   title="#{bundle.EditBooksTitle_category}" required="true" 
+                        <h:outputLabel styleClass="form-label" value="Category:" for="category" />
+                        <h:inputText id="category" styleClass="form-control" 
+                                   value="#{booksController.selected.category}"
+                                   title="#{bundle.EditBooksTitle_category}" 
+                                   required="true" 
                                    requiredMessage="#{bundle.EditBooksRequiredMessage_category}"/>
                     </div>
                     <div class="form-group">
                         <h:outputLabel styleClass="form-label" value="Cover URL:" for="cover" />
-                        <h:inputText id="cover" styleClass="form-control" value="#{booksController.selected.cover}"
+                        <h:inputText id="cover" styleClass="form-control" 
+                                   value="#{booksController.selected.cover}"
                                    title="Book Cover URL"/>
                     </div>
                     <div class="form-group">
                         <h:outputLabel styleClass="form-label" value="Description:" for="description" />
-                        <h:inputTextarea id="description" styleClass="form-control" value="#{booksController.selected.description}"
-                                   title="Book Description" rows="4"/>
+                        <h:inputTextarea id="description" styleClass="form-control" 
+                                       value="#{booksController.selected.description}"
+                                       title="Book Description" rows="4"/>
                     </div>
                     <div class="form-actions">
-                        <h:commandButton value="#{bundle.EditBooksSaveLink}" action="#{booksController.update}" styleClass="jsfcrud_button create"/>
-                        <h:commandButton value="#{bundle.EditBooksShowAllLink}" action="#{booksController.prepareList}" immediate="true" styleClass="jsfcrud_button view"/>
-                        <h:button value="Back to Dashboard" outcome="/admin/dashboard" styleClass="jsfcrud_button"/>
+                        <h:commandButton action="#{booksController.update}" 
+                                       value="#{bundle.EditBooksSaveLink}" 
+                                       styleClass="jsfcrud_button create"/>
+                        <h:link outcome="View" 
+                               value="#{bundle.EditBooksViewLink}"
+                               styleClass="jsfcrud_button view"/>
+                        <h:commandLink action="#{booksController.prepareList}" 
+                                     value="Show All Books"
+                                     styleClass="jsfcrud_button"/>
                     </div>
                 </h:form>
             </div>

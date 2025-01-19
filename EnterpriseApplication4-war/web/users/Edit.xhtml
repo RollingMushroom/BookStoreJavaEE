@@ -10,29 +10,62 @@
             <h:outputText value="#{bundle.EditUsersTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            <div class="page-header">
+                <h1 class="page-title">#{bundle.EditUsersTitle}</h1>
+            </div>
+            
+            <h:panelGroup id="messagePanel" layout="block" styleClass="message-panel">
+                <h:messages errorClass="error-message" infoClass="info-message" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditUsersLabel_userId}" for="userId" />
-                    <h:inputText id="userId" value="#{usersController.selected.userId}" title="#{bundle.EditUsersTitle_userId}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_userId}"/>
-                    <h:outputLabel value="#{bundle.EditUsersLabel_username}" for="username" />
-                    <h:inputText id="username" value="#{usersController.selected.username}" title="#{bundle.EditUsersTitle_username}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_username}"/>
-                    <h:outputLabel value="#{bundle.EditUsersLabel_password}" for="password" />
-                    <h:inputText id="password" value="#{usersController.selected.password}" title="#{bundle.EditUsersTitle_password}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_password}"/>
-                    <h:outputLabel value="#{bundle.EditUsersLabel_email}" for="email" />
-                    <h:inputText id="email" value="#{usersController.selected.email}" title="#{bundle.EditUsersTitle_email}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_email}"/>
+            
+            <h:form styleClass="user-form">
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    <h:outputLabel value="#{bundle.EditUsersLabel_userId}" for="userId" styleClass="form-label"/>
+                    <h:inputText id="userId" 
+                               value="#{usersController.selected.userId}" 
+                               title="#{bundle.EditUsersTitle_userId}" 
+                               required="true" 
+                               requiredMessage="#{bundle.EditUsersRequiredMessage_userId}"
+                               styleClass="form-control"/>
+                    
+                    <h:outputLabel value="#{bundle.EditUsersLabel_username}" for="username" styleClass="form-label"/>
+                    <h:inputText id="username" 
+                               value="#{usersController.selected.username}" 
+                               title="#{bundle.EditUsersTitle_username}" 
+                               required="true" 
+                               requiredMessage="#{bundle.EditUsersRequiredMessage_username}"
+                               styleClass="form-control"/>
+                    
+                    <h:outputLabel value="#{bundle.EditUsersLabel_password}" for="password" styleClass="form-label"/>
+                    <h:inputSecret id="password" 
+                                value="#{usersController.selected.password}" 
+                                title="#{bundle.EditUsersTitle_password}" 
+                                required="true" 
+                                requiredMessage="#{bundle.EditUsersRequiredMessage_password}"
+                                styleClass="form-control"/>
+                    
+                    <h:outputLabel value="#{bundle.EditUsersLabel_email}" for="email" styleClass="form-label"/>
+                    <h:inputText id="email" 
+                               value="#{usersController.selected.email}" 
+                               title="#{bundle.EditUsersTitle_email}" 
+                               required="true" 
+                               requiredMessage="#{bundle.EditUsersRequiredMessage_email}"
+                               styleClass="form-control"/>
                 </h:panelGrid>
-                <h:commandLink action="#{usersController.update}" value="#{bundle.EditUsersSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditUsersViewLink}"/>
-                <br />
-                <h:commandLink action="#{usersController.prepareList}" value="#{bundle.EditUsersShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditUsersIndexLink}" />
+                
+                <div class="user-actions">
+                    <h:commandLink action="#{usersController.update}" 
+                                 value="#{bundle.EditUsersSaveLink}"
+                                 styleClass="primary-action"/>
+                    
+                    <h:link outcome="View" 
+                           value="#{bundle.EditUsersViewLink}"
+                           styleClass="secondary-action"/>
+                    
+                    <h:link outcome="List" 
+                           value="Back to List"
+                           styleClass="secondary-action"/>
+                </div>
             </h:form>
         </ui:define>
     </ui:composition>

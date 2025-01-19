@@ -1306,3 +1306,541 @@ select.form-control option {
         justify-content: center;
     }
 }
+
+/* Enhanced Book List Styles */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #3498db;
+}
+
+.page-title {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.create-btn {
+    background-color: #2ecc71;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.create-btn:hover {
+    background-color: #27ae60;
+    transform: translateY(-1px);
+}
+
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.pagination-info {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.pagination-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.pagination-btn {
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.pagination-btn:hover {
+    background-color: #2980b9;
+}
+
+.pagination-btn.disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.table-header {
+    background-color: #2c3e50;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    padding: 1rem;
+}
+
+.table-row-odd, .table-row-even {
+    transition: background-color 0.3s ease;
+}
+
+.table-row-odd {
+    background-color: white;
+}
+
+.table-row-even {
+    background-color: #f8f9fa;
+}
+
+.table-row-odd:hover, .table-row-even:hover {
+    background-color: #edf2f7;
+}
+
+.dashboard-table td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.book-title {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    background-color: #3498db;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.price-tag {
+    font-weight: 600;
+    color: #27ae60;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.action-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+}
+
+.view-btn {
+    background-color: #3498db;
+}
+
+.view-btn:hover {
+    background-color: #2980b9;
+}
+
+.edit-btn {
+    background-color: #f39c12;
+}
+
+.edit-btn:hover {
+    background-color: #d68910;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+.bottom-actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 2rem 0;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: #bdc3c7;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.empty-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.empty-message {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    margin: 1rem 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .table-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .pagination-controls {
+        justify-content: center;
+    }
+    
+    .action-buttons {
+        flex-wrap: wrap;
+    }
+}
+
+/* User CRUD Styles */
+.user-form {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.user-form h:panelGrid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+.user-form input[type="text"],
+.user-form input[type="password"],
+.user-form input[type="email"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.user-form input[type="text"]:focus,
+.user-form input[type="password"]:focus,
+.user-form input[type="email"]:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52,152,219,0.2);
+}
+
+.user-form label {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.user-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.user-actions a,
+.user-actions input[type="submit"] {
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.user-actions .primary-action {
+    background-color: #3498db;
+    color: white;
+}
+
+.user-actions .primary-action:hover {
+    background-color: #2980b9;
+}
+
+.user-actions .secondary-action {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+.user-actions .secondary-action:hover {
+    background-color: #bdc3c7;
+}
+
+.user-actions .danger-action {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.user-actions .danger-action:hover {
+    background-color: #c0392b;
+}
+
+/* User List Styles */
+.user-list {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+.user-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.user-list th {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.user-list td {
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    color: #2c3e50;
+}
+
+.user-list tr:hover {
+    background-color: #f8f9fa;
+}
+
+.user-list .action-column {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.user-list .action-link {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.user-list .view-link {
+    background-color: #3498db;
+    color: white;
+}
+
+.user-list .edit-link {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.user-list .delete-link {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.user-list .action-link:hover {
+    opacity: 0.9;
+}
+
+/* Message Panel Styles */
+.message-panel {
+    max-width: 1200px;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.message-panel .error {
+    background-color: #fde8e8;
+    color: #c81e1e;
+    border: 1px solid #fbd5d5;
+}
+
+.message-panel .info {
+    background-color: #e8f4fd;
+    color: #1e88c8;
+    border: 1px solid #d5ebfb;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .user-form h:panelGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .user-actions {
+        flex-direction: column;
+    }
+    
+    .user-actions a,
+    .user-actions input[type="submit"] {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .user-list .action-column {
+        flex-direction: column;
+    }
+    
+    .user-list .action-link {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Book Action Buttons */
+.book-actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.action-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.action-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+}
+
+.action-button.edit {
+    background-color: #3498db;
+    color: white;
+    border: 2px solid #3498db;
+}
+
+.action-button.edit:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.action-button.create {
+    background-color: #2ecc71;
+    color: white;
+    border: 2px solid #2ecc71;
+}
+
+.action-button.create:hover {
+    background-color: #27ae60;
+    border-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+.action-button.back {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    border: 2px solid #bdc3c7;
+}
+
+.action-button.back:hover {
+    background-color: #bdc3c7;
+    border-color: #95a5a6;
+    transform: translateY(-2px);
+}
+
+.action-button.delete {
+    background-color: #e74c3c;
+    color: white;
+    border: 2px solid #e74c3c;
+}
+
+.action-button.delete:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .book-actions {
+        width: 100%;
+    }
+    
+    .action-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .action-button {
+        width: 100%;
+        margin: 0.25rem 0;
+    }
+}
