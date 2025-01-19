@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewBooksTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewBooksLabel_bookId}"/>
+                    <h:outputText value="#{booksController.selected.bookId}" title="#{bundle.ViewBooksTitle_bookId}"/>
+                    <h:outputText value="#{bundle.ViewBooksLabel_title}"/>
+                    <h:outputText value="#{booksController.selected.title}" title="#{bundle.ViewBooksTitle_title}"/>
+                    <h:outputText value="#{bundle.ViewBooksLabel_author}"/>
+                    <h:outputText value="#{booksController.selected.author}" title="#{bundle.ViewBooksTitle_author}"/>
+                    <h:outputText value="#{bundle.ViewBooksLabel_price}"/>
+                    <h:outputText value="#{booksController.selected.price}" title="#{bundle.ViewBooksTitle_price}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{booksController.destroyAndView}" value="#{bundle.ViewBooksDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewBooksEditLink}"/>
+                <br />
+                <h:commandLink action="#{booksController.prepareCreate}" value="#{bundle.ViewBooksCreateLink}" />
+                <br />
+                <h:commandLink action="#{booksController.prepareList}" value="#{bundle.ViewBooksShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewBooksIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

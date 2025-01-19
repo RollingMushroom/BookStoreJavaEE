@@ -66,6 +66,10 @@ public class Books implements Serializable {
     @Size(max = 1000)
     @Column(name = "COVER")
     private String cover;
+    
+    @Size(max = 2000)
+    @Column(name = "DESCRIPTION")
+    private String description;
 
     public Books() {
     }
@@ -128,6 +132,14 @@ public class Books implements Serializable {
 
     public void setCover(String cover) {
         this.cover = cover;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
