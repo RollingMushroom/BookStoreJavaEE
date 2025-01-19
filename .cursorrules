@@ -1,7 +1,0 @@
-- This is a netbeans project
-- Database used is javaDB
-- Server used is GlassFish Server
-- This project uses java ee 8
-- dont import any jakarta packages
-- all styling and css should be in the jsfcrud.css file
-
