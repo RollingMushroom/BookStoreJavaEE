@@ -1160,29 +1160,32 @@ select.form-control option {
 }
 
 .book-detail {
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 2rem auto;
     max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
 }
 
 .book-detail-content {
     display: flex;
-    gap: 40px;
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    gap: 2rem;
+    align-items: flex-start;
 }
 
 .book-detail-image {
-    flex: 0 0 400px;
+    flex: 0 0 300px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .detail-cover-image {
     width: 100%;
     height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    object-fit: cover;
+    border-radius: 4px;
 }
 
 .book-detail-info {
@@ -1190,48 +1193,102 @@ select.form-control option {
 }
 
 .book-detail-info h2 {
-    font-size: 2em;
     color: #2c3e50;
-    margin: 0 0 20px 0;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
 }
 
-.detail-author {
-    font-size: 1.2em;
-    color: #666;
-    font-style: italic;
-    margin: 10px 0;
-}
-
-.detail-category {
-    font-size: 1.1em;
-    color: #007bff;
-    margin: 10px 0;
+.detail-author,
+.detail-category,
+.detail-price {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #34495e;
 }
 
 .detail-price {
-    font-size: 1.5em;
-    color: #28a745;
+    font-size: 1.3rem;
+    color: #e74c3c;
     font-weight: bold;
-    margin: 20px 0;
+}
+
+.detail-description {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.detail-description strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.detail-description p {
+    line-height: 1.6;
+    color: #555;
+    text-align: justify;
 }
 
 .detail-actions {
-    margin-top: 30px;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.jsfcrud_button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.jsfcrud_button.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.jsfcrud_button.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+.jsfcrud_button.edit-btn {
+    background-color: #3498db;
+    color: white;
+}
+
+.jsfcrud_button.edit-btn:hover {
+    background-color: #2980b9;
+}
+
+.jsfcrud_button.create {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.jsfcrud_button.create:hover {
+    background-color: #27ae60;
 }
 
 .back-button {
-    padding: 12px 24px;
-    background-color: #3498db;
-    color: white;
-    border: none;
+    padding: 0.6rem 1.2rem;
     border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    text-decoration: none;
+    color: #7f8c8d;
+    background-color: #ecf0f1;
+    transition: all 0.3s ease;
 }
 
 .back-button:hover {
-    background-color: #2980b9;
+    background-color: #bdc3c7;
+    color: #2c3e50;
 }
 
 @media (max-width: 768px) {
@@ -1242,16 +1299,10 @@ select.form-control option {
     .book-detail-image {
         flex: 0 0 auto;
         max-width: 100%;
+        margin-bottom: 2rem;
     }
-}
-
-.detail-description {
-    margin-top: 20px;
-    line-height: 1.6;
-    color: #2c3e50;
-    font-size: 16px;
-    padding: 15px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    border-left: 4px solid #3498db;
+    
+    .detail-actions {
+        justify-content: center;
+    }
 }

@@ -9,34 +9,58 @@
             <h:outputText value="#{bundle.ViewBooksTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewBooksLabel_bookId}"/>
-                    <h:outputText value="#{booksController.selected.bookId}" title="#{bundle.ViewBooksTitle_bookId}"/>
-                    <h:outputText value="#{bundle.ViewBooksLabel_title}"/>
-                    <h:outputText value="#{booksController.selected.title}" title="#{bundle.ViewBooksTitle_title}"/>
-                    <h:outputText value="#{bundle.ViewBooksLabel_author}"/>
-                    <h:outputText value="#{booksController.selected.author}" title="#{bundle.ViewBooksTitle_author}"/>
-                    <h:outputText value="#{bundle.ViewBooksLabel_price}"/>
-                    <h:outputText value="#{booksController.selected.price}" title="#{bundle.ViewBooksTitle_price}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{booksController.destroyAndView}" value="#{bundle.ViewBooksDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewBooksEditLink}"/>
-                <br />
-                <h:commandLink action="#{booksController.prepareCreate}" value="#{bundle.ViewBooksCreateLink}" />
-                <br />
-                <h:commandLink action="#{booksController.prepareList}" value="#{bundle.ViewBooksShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewBooksIndexLink}"/>
-
-            </h:form>
+            <div class="book-detail">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:form>
+                    <div class="book-detail-content">
+                        <div class="book-detail-image">
+                            <h:graphicImage value="#{booksController.selected.cover}" 
+                                          rendered="#{not empty booksController.selected.cover}"
+                                          styleClass="detail-cover-image"/>
+                        </div>
+                        <div class="book-detail-info">
+                            <h2 class="book-title">#{booksController.selected.title}</h2>
+                            <p class="detail-author">
+                                <strong>Author:</strong> #{booksController.selected.author}
+                            </p>
+                            <p class="detail-category">
+                                <strong>Category:</strong> #{booksController.selected.category}
+                            </p>
+                            <p class="detail-price">
+                                <strong>Price:</strong> $#{booksController.selected.price}
+                            </p>
+                            <div class="detail-description">
+                                <strong>Description:</strong>
+                                <p>#{booksController.selected.description}</p>
+                            </div>
+                            
+                            <div class="detail-actions">
+                                <h:commandLink action="#{booksController.destroyAndView}" 
+                                             value="#{bundle.ViewBooksDestroyLink}"
+                                             styleClass="jsfcrud_button delete-btn"/>
+                                
+                                <h:link outcome="Edit" 
+                                       value="#{bundle.ViewBooksEditLink}"
+                                       styleClass="jsfcrud_button edit-btn"/>
+                                
+                                <h:commandLink action="#{booksController.prepareCreate}" 
+                                             value="#{bundle.ViewBooksCreateLink}"
+                                             styleClass="jsfcrud_button create"/>
+                                
+                                <h:commandLink action="#{booksController.prepareList}" 
+                                             value="#{bundle.ViewBooksShowAllLink}"
+                                             styleClass="back-button"/>
+                                
+                                <h:link outcome="/admin/dashboard" 
+                                       value="Back to Dashboard"
+                                       styleClass="back-button"/>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 
