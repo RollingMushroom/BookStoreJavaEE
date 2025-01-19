@@ -46,6 +46,11 @@
                         <h:inputText id="cover" styleClass="form-control" value="#{booksController.selected.cover}"
                                    title="Book Cover URL"/>
                     </div>
+                    <div class="form-group">
+                        <h:outputLabel styleClass="form-label" value="Description:" for="description" />
+                        <h:inputTextarea id="description" styleClass="form-control" value="#{booksController.selected.description}"
+                                   title="Book Description" rows="4"/>
+                    </div>
                     <div class="form-actions">
                         <h:commandButton value="Save" action="#{booksController.create}" styleClass="jsfcrud_button create"/>
                         <h:commandButton value="Show All Books" action="#{booksController.prepareList}" immediate="true" styleClass="jsfcrud_button view"/>
