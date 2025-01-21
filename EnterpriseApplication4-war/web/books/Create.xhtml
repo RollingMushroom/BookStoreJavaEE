@@ -48,13 +48,9 @@
                     </div>
                     <div class="form-group">
                         <h:outputLabel styleClass="form-label" value="Description:" for="description" />
-                        <h:inputTextarea id="description" styleClass="form-control" 
-                                   value="#{booksController.selected.description}"
-                                   title="Book Description" 
-                                   rows="4"
-                                   maxlength="2000">
+                        
                             <f:validateLength maximum="2000"/>
-                        </h:inputTextarea>
+                        
                         <small class="form-text text-muted">Maximum 2000 characters</small>
                     </div>
                     <div class="form-actions">
