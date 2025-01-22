@@ -1,0 +1,94 @@
+
+CREATE TABLE users (
+    UserID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    Username VARCHAR(100) NOT NULL UNIQUE,
+    Password VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE,
+    Role VARCHAR(50) DEFAULT 'user'
+);
+
+Create books table
+CREATE TABLE books (
+    BookID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    Title VARCHAR(255) NOT NULL,
+    Author VARCHAR(255) NOT NULL,
+    Price DECIMAL(10, 2) NOT NULL,
+    Category VARCHAR(100),
+    Cover VARCHAR(500), -- URL for the cover image
+    Description VARCHAR(2000) -- Allows up to 2000 characters for book descriptions
+);
+
+-- Insert Admin
+INSERT INTO users (Username, Password, Email, Role)
+VALUES ('admin', 'admin', 'admin@example.com', 'admin');
+
+-- Insert Regular User
+INSERT INTO users (Username, Password, Email, Role)
+VALUES ('user', 'user', 'user@example.com', 'user');
+
+
+
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('The Great Gatsby', 'F. Scott Fitzgerald', 10.99, 'Classic', 'https://books.google.com.my/books/publisher/content?id=WpD_DAAAQBAJ&pg=PP1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U2smY1XG0tjSZpqcsPWGRs18i-NFg&w=1280');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('1984', 'George Orwell', 8.99, 'Dystopian', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1657781256i/61439040.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('Pride and Prejudice', 'Jane Austen', 12.99, 'Romance', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1681804503i/129915654.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('To Kill a Mockingbird', 'Harper Lee', 9.99, 'Classic', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1612238791i/56916837.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('The Catcher in the Rye', 'J.D. Salinger', 10.49, 'Classic', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1398034300i/5107.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('The Hobbit', 'J.R.R. Tolkien', 14.99, 'Fantasy', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1546071216i/5907.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('Fahrenheit 451', 'Ray Bradbury', 11.99, 'Science Fiction', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1383718290i/13079982.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('The Book Thief', 'Markus Zusak', 13.99, 'Historical Fiction', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1522157426i/19063.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('Moby-Dick', 'Herman Melville', 15.49, 'Adventure', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1327940656i/153747.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('Little Women', 'Louisa May Alcott', 12.49, 'Classic', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1562690475i/1934.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('The Alchemist', 'Paulo Coelho', 16.99, 'Philosophical Fiction', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1654371463i/18144590.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('The Road', 'Cormac McCarthy', 13.49, 'Post-apocalyptic', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1600241424i/6288.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('The Kite Runner', 'Khaled Hosseini', 14.99, 'Drama', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1541428344i/17165596.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('The Giver', 'Lois Lowry', 9.99, 'Young Adult', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1342493368i/3636.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('Slaughterhouse-Five', 'Kurt Vonnegut', 12.99, 'Satire', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1440319389i/4981.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('The Shining', 'Stephen King', 14.49, 'Horror', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1353277730i/11588.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('Brave New World', 'Aldous Huxley', 11.99, 'Dystopian', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1575509280i/5129.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('Crime and Punishment', 'Fyodor Dostoevsky', 18.99, 'Crime', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1382846449i/7144.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('Jane Eyre', 'Charlotte Brontë', 13.49, 'Classic', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1557343311i/10210.jpg');
+
+INSERT INTO books (Title, Author, Price, Category, cover) VALUES ('Dracula', 'Bram Stoker', 10.99, 'Horror', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1387151694i/17245.jpg');
+UPDATE books SET Description = 'A classic novel that explores themes of wealth, love, and the American Dream in the 1920s.' WHERE Title = 'The Great Gatsby';
+UPDATE books SET Description = 'A dystopian story of a totalitarian regime that uses surveillance and mind control to oppress its citizens.' WHERE Title = '1984';
+UPDATE books SET Description = 'A timeless romance about love, society, and class in early 19th-century England.' WHERE Title = 'Pride and Prejudice';
+UPDATE books SET Description = 'A powerful story about race, injustice, and morality in the American South.' WHERE Title = 'To Kill a Mockingbird';
+UPDATE books SET Description = 'A coming-of-age story that delves into the complexities of teenage rebellion and identity.' WHERE Title = 'The Catcher in the Rye';
+UPDATE books SET Description = 'A fantastical journey of a hobbit who embarks on a daring adventure to reclaim a lost kingdom.' WHERE Title = 'The Hobbit';
+UPDATE books SET Description = 'A gripping tale of a society where books are banned, and a fireman discovers the power of knowledge.' WHERE Title = 'Fahrenheit 451';
+UPDATE books SET Description = 'A heart-wrenching story of a young girl’s experiences in Nazi Germany, filled with love and loss.' WHERE Title = 'The Book Thief';
+UPDATE books SET Description = 'An epic adventure of a sea captain’s obsessive quest to capture a giant white whale.' WHERE Title = 'Moby-Dick';
+UPDATE books SET Description = 'The story of four sisters growing up in Civil War-era New England, balancing ambition and family.' WHERE Title = 'Little Women';
+UPDATE books SET Description = 'A philosophical tale about following one’s dreams and discovering life’s greater meaning.' WHERE Title = 'The Alchemist';
+UPDATE books SET Description = 'A post-apocalyptic journey of a father and son struggling to survive in a desolate world.' WHERE Title = 'The Road';
+UPDATE books SET Description = 'A story of betrayal, friendship, and redemption set against the backdrop of modern Afghanistan.' WHERE Title = 'The Kite Runner';
+UPDATE books SET Description = 'A dystopian novel about a boy’s journey in a world of sameness, where emotions and choices are suppressed.' WHERE Title = 'The Giver';
+UPDATE books SET Description = 'A darkly satirical tale about the absurdities of war and the human condition.' WHERE Title = 'Slaughterhouse-Five';
+UPDATE books SET Description = 'A chilling horror story about a haunted hotel and the descent into madness of its caretaker.' WHERE Title = 'The Shining';
+UPDATE books SET Description = 'A futuristic novel that questions the ethics of technology, conditioning, and societal control.' WHERE Title = 'Brave New World';
+UPDATE books SET Description = 'A psychological exploration of guilt, morality, and redemption in 19th-century Russia.' WHERE Title = 'Crime and Punishment';
+UPDATE books SET Description = 'The tale of an orphaned governess navigating love, secrets, and independence in Victorian England.' WHERE Title = 'Jane Eyre';
+UPDATE books SET Description = 'A gothic horror story of a vampire count and the lengths to stop his reign of terror.' WHERE Title = 'Dracula';
+UPDATE books
+SET Description = 'A thrilling tale of betrayal, revenge, and redemption, following Edmond Dantès as he seeks justice after being falsely imprisoned.'
+WHERE Title = 'The Count of Monte Cristo';
+
